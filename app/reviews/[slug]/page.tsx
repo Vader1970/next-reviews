@@ -14,6 +14,13 @@ export async function generateStaticParams(): Promise<ReviewPageParams[]> {
   return slugs.map((slug) => ({ slug }));
 }
 
+export async function generateMetadata({ params: { slug } }: ReviewPageProps) {
+  const review = await getReview(slug);
+  return {
+    title: review.title,
+  };
+}
+
 export default async function ReviewPage({ params: { slug } }: ReviewPageProps) {
   const review = await getReview(slug);
   // console.log("[Homepage] rendering", slug);
