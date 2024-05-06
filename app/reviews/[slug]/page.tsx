@@ -1,6 +1,6 @@
-import Heading from "@/components/Heading";
-import ShareLinkButton from "@/components/ShareLinkButton";
-import { getReview, getSlugs } from "@/lib/reviews";
+import Heading from "../../../components/Heading";
+import ShareLinkButton from "../../../components/ShareLinkButton";
+import { getReview, getSlugs } from "../../../lib/reviews";
 
 interface ReviewPageParams {
   slug: string;
