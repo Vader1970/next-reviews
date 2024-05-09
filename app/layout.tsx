@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import "./globals.css";
-import Link from "next/link";
 import NavBar from "../components/NavBar";
 import { exo2, orbitron } from "./fonts";
 

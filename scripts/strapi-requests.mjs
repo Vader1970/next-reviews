@@ -2,14 +2,14 @@ import { writeFileSync } from "fs";
 import qs from "qs";
 
 const url =
-  "http://localhost:1337/api/reviews" +
+  "http://next-reviews-cms.encoded.io/api/reviews" +
   "?" +
   qs.stringify(
     {
       fields: ["slug", "title", "subtitle", "publishedAt", "body"],
       populate: { image: { fields: ["url"] } },
       sort: ["publishedAt:desc"],
-      pagination: { pageSize: 6 },
+      pagination: { pageSize: 6, page: 1 },
     },
     { encodeValuesOnly: true }
   );
