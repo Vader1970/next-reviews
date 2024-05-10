@@ -1,5 +1,6 @@
 import Heading from "../../components/Heading";
 
+// Define a functional component for rendering the "Not Found" page
 export default function NotFound() {
   return (
     <>

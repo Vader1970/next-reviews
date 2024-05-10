@@ -7,16 +7,25 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 
+// Define interface for SearchBoxProps
 export interface SearchBoxProps {
-  reviews: SearchableReview[];
+  reviews: SearchableReview[]; // Array of searchable reviews
 }
 
+// Define SearchBox component
 export default function SearchBox() {
+  // Initialize router and isClient hook
   const router = useRouter();
   const isClient = useIsClient();
+
+  // Initialize state variables for query and debounced query
   const [query, setQuery] = useState("");
   const [debouncedQuery] = useDebounce(query, 300);
+
+  // Initialize state variable for search results
   const [reviews, setReviews] = useState([]);
+
+  // Fetch search results based on debounced query
   useEffect(() => {
     if (debouncedQuery.length > 1) {
       const controller = new AbortController();
@@ -26,31 +35,32 @@ export default function SearchBox() {
         const reviews = await response.json();
         setReviews(reviews);
       })();
-      return () => controller.abort();
+      return () => controller.abort(); // Cleanup function to abort fetch if component unmounts or query changes
     } else {
-      setReviews([]);
+      setReviews([]); // Clear search results if query length is less than 2
     }
   }, [debouncedQuery]);
 
+  // Function to handle selection from dropdown menu
   const handleChange = (review: SearchableReview) => {
     if (review && review.slug) {
-      router.push(`/reviews/${review.slug}`);
+      router.push(`/reviews/${review.slug}`); // Navigate to selected review page
     }
   };
 
-  // console.log("[SearchBox]", { query, debouncedQuery });
-  //   console.log("[SearchBox] isClient:", isClient);
+  // If not running on the client-side, return null
   if (!isClient) {
     return null;
   }
 
+  // Render search box with dropdown menu
   return (
     <div className='relative w-48'>
       <Combobox onChange={handleChange}>
         <ComboboxInput
           placeholder='Search...'
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={(event) => setQuery(event.target.value)} // Update query state as user types
           className='border px-2 py-1 rounded w-full'
         />
         <ComboboxOptions className='absolute bg-white py-1 w-full'>

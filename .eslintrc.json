@@ -1,3 +1,6 @@
+// This .eslintrc.json file extends the default ESLint configuration provided by Next.js specifically for core web vitals. By extending this configuration, your ESLint setup inherits all the rules and settings defined in the core-web-vitals configuration, ensuring that your project adheres to best practices for web performance and user experience related to core web vitals.
+
 {
+  // Extend the Next.js core-web-vitals ESLint configuration
   "extends": "next/core-web-vitals"
 }
